@@ -74,7 +74,14 @@ async function createInternalUser(req, res) {
 
     // hash password
     if (password) {
-      user.password = bcrypt.hashSync(password, saltRounds);
+      user.password = await new Promise((resolve, reject) => {
+        bcrypt.genSalt(saltRounds, (err, salt) => {
+          bcrypt.hash(password, salt, (hash) => {
+            if (err) reject(err);
+            resolve(hash);
+          });
+        });
+      });
     }
     // save user
     await user.save();
