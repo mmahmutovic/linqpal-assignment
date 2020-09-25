@@ -67,25 +67,25 @@ async function createInternalUser(req, res) {
   try {
     const { username } = req.body;
     const { password } = req.body;
+    if (!username || !password) {
+      return errorHandler('Please enter username and password', req, res);
+    }
     if (await User.findOne({ username })) {
       return errorHandler('User already exists with that username', req, res);
     }
     const user = new User({ username, password, externalUser: false });
 
-    // hash password
-    if (password) {
-      user.password = await new Promise((resolve, reject) => {
-        bcrypt.genSalt(saltRounds, (err, salt) => {
-          bcrypt.hash(password, salt, (hash) => {
-            if (err) reject(err);
-            resolve(hash);
-          });
+    user.password = await new Promise((resolve, reject) => {
+      bcrypt.genSalt(saltRounds, (err, salt) => {
+        bcrypt.hash(password, salt, (hash) => {
+          if (err) reject(err);
+          resolve(hash);
         });
       });
-    }
+    });
     // save user
     await user.save();
-    return res.status(200).json(user);
+    return res.status(200).json({ user, password });
   } catch (error) {
     return errorHandler(error, req, res);
   }
