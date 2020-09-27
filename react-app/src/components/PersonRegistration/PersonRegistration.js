@@ -3,7 +3,7 @@ import { Form, Field } from 'react-final-form'
 import CountrySelector from '../CountrySelector/CountrySelector';
 import {FormControl, Button} from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import {addUser} from './../../services/user.service';
+import {addUser} from '../../services/user.service';
 import CitySelector from '../CitySelector/CitySelector';
 import {InputField} from '../InputField/InputField';
 
@@ -38,11 +38,11 @@ const useStyles = makeStyles((theme) => ({
   }));
 
 
-export default function Person(props) {
+export default function PersonRegistration(props) {
     const classes = useStyles();
     const onSubmit =  async (values) =>{
-      const result = await addUser(values);
-      console.log(result);
+      await addUser(values);
+      window.location.reload(false);
     }
 
     
@@ -53,7 +53,7 @@ export default function Person(props) {
         <Form onSubmit={onSubmit}>
           {({handleSubmit, values}) => (
             <FormControl className={classes.root} noValidate autoComplete="off">
-                <Field name="name" component={InputField} className={classes.textField} required label="First name" />
+                <Field name="firstName" component={InputField} className={classes.textField} required label="First name" />
                 <Field name="lastName" component={InputField} className={classes.textField} required label="Last Name" />
                 <Field name="ssn" component={InputField} className={classes.textField} required label="Social security number" defaultValue="" />
                 <Field name="phoneNumber" component={InputField} className={classes.textField} required label="Phone number" defaultValue="" />

@@ -8,7 +8,7 @@ const schema = new Schema({
   password: {
     type: String,
   },
-  name: {
+  firstName: {
     type: String,
   },
   lastName: {
