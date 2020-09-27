@@ -16,7 +16,7 @@ const useStyles = makeStyles({
   });
 
   
-  export default function PersonList() {
+export default function PersonList() {
     const classes = useStyles();
     const [users, setUsers] = useState([]);
     const [isLoading, setLoading] = useState(true);
@@ -64,4 +64,4 @@ const useStyles = makeStyles({
         }
       </TableContainer>
     );
-  }
+}
