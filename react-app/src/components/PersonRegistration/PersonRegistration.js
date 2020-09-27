@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Form, Field } from 'react-final-form'
 import CountrySelector from '../CountrySelector/CountrySelector';
 import {FormControl, Button} from '@material-ui/core';
@@ -38,35 +38,48 @@ const useStyles = makeStyles((theme) => ({
   }));
 
 
-export default function PersonRegistration(props) {
+export default function PersonRegistration() {
     const classes = useStyles();
+    const [submitted, setSubmit] = useState(true);
     const onSubmit =  async (values) =>{
       await addUser(values);
-      window.location.reload(false);
+      setSubmit(true);
     }
 
-    
-
     return(
-      <div className={classes.container}>
-        <h1>Hello, Please fill out this form</h1>
-        <Form onSubmit={onSubmit}>
-          {({handleSubmit, values}) => (
-            <FormControl className={classes.root} noValidate autoComplete="off">
-                <Field name="firstName" component={InputField} className={classes.textField} required label="First name" />
-                <Field name="lastName" component={InputField} className={classes.textField} required label="Last Name" />
-                <Field name="ssn" component={InputField} className={classes.textField} required label="Social security number" defaultValue="" />
-                <Field name="phoneNumber" component={InputField} className={classes.textField} required label="Phone number" defaultValue="" />
-                <Field name="country" component={CountrySelector} className ={classes.selector} />
-                <Field name="city" component={CitySelector} country={values.country} className ={classes.selector} />      
-                <Field name="zipCode" component={InputField} className={classes.textField} label="Zip Code"/>
-                <Field name="address" component={InputField} className={classes.textField} label="Address"/>
-                <Button className={classes.button} variant="contained" color="primary" onClick={handleSubmit}>
-                  Send data
-                </Button>
-            </FormControl>
-          )}
-        </Form>
+      <div
+        justify="center"
+        alignItems="center"
+        className={classes.container}>
+        
+        {!submitted &&
+          <div>
+            <h1>Hello, Please fill out this form</h1>
+            <Form onSubmit={onSubmit}>
+              
+            {({handleSubmit, values}) => (
+              <FormControl className={classes.root} noValidate autoComplete="off">
+                  <Field name="firstName" component={InputField} className={classes.textField} required label="First name" />
+                  <Field name="lastName" component={InputField} className={classes.textField} required label="Last Name" />
+                  <Field name="ssn" component={InputField} className={classes.textField} required label="Social security number" defaultValue="" />
+                  <Field name="phoneNumber" component={InputField} className={classes.textField} required label="Phone number" defaultValue="" />
+                  <Field name="country" component={CountrySelector} className ={classes.selector} />
+                  <Field name="city" component={CitySelector} country={values.country} className ={classes.selector} />      
+                  <Field name="zipCode" component={InputField} className={classes.textField} label="Zip Code"/>
+                  <Field name="address" component={InputField} className={classes.textField} label="Address"/>
+                  <Button className={classes.button} variant="contained" color="primary" onClick={handleSubmit}>
+                    Send data
+                  </Button>
+              </FormControl>
+            )}
+          </Form>
+          </div>
+        }
+        {submitted &&
+          <div className={classes.root}>
+            <p> Thanks for submitting the form!</p>
+          </div>
+        }
         </div>
     ) 
 };
