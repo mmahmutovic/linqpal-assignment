@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect} from 'react';
 import { FormControl, Button } from '@material-ui/core';
 import { Form, Field } from 'react-final-form';
 import { makeStyles } from '@material-ui/core/styles';
@@ -33,17 +33,19 @@ const useStyles = makeStyles((theme) => ({
       display:'flex'
     }
     }));
-export default function Login (props){
 
+export default function Login (props){
     const classes = useStyles();
+
+
     const onSubmit =  async (values) =>{
-      try {
-        await login(values);
-        props.history.push("/admin");
-        window.location.reload();
-      } catch(err){
-      }
+        try {
+          await login(values);
+        } catch(err) { 
+          console.log(err);
+        }
     }
+
     useEffect(() => {
       const user = getCurrentUser();
       if (user) {
@@ -54,7 +56,7 @@ export default function Login (props){
     return (
         <div className={classes.container}>
            <Form onSubmit={onSubmit}>
-              {({handleSubmit, values}) => (
+              {({handleSubmit, values, meta}) => (
               <FormControl className={classes.root}>
                   <Field name="username" component={InputField} className={classes.textField} required label="Username" />
                   <Field name="password" required label="Password"  type="password" component={InputField} className={classes.textField} />

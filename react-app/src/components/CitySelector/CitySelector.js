@@ -1,4 +1,4 @@
-import React, { Component, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Cities } from '../../assets/Cities';
 import { Select, MenuItem, InputLabel, FormControl}  from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';

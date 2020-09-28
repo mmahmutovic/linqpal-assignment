@@ -1,9 +1,8 @@
 /* eslint-disable no-unused-vars */
-function errorHandler(res, err, message, status) {
-  return res.status(status || 500).json({
-    message: message || 'Internal server error!',
+function errorHandler(err, req, res, status) {
+  return res.status(err.status || status || 500).json({
+    message: err.message || 'Internal server error!',
     err: err || new Error(),
   });
 }
-
 module.exports = errorHandler;

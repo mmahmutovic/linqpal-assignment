@@ -1,9 +1,8 @@
-import React, { useState} from 'react';
+import React from 'react';
 import style from './CountrySelector.css';
 import { makeStyles } from '@material-ui/core/styles';
 import { Select, MenuItem, InputLabel, FormControl}  from '@material-ui/core';
 import { UsaStates } from 'usa-states';
-import CitySelector from '../CitySelector/CitySelector';
 
 const usaStates = new UsaStates();
 const useStyles = makeStyles((theme) => ({
