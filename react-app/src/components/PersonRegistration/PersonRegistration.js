@@ -6,6 +6,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import {addUser} from '../../services/user.service';
 import CitySelector from '../CitySelector/CitySelector';
 import {InputField} from '../InputField/InputField';
+import Alert from '@material-ui/lab/Alert';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -75,10 +76,8 @@ export default function PersonRegistration() {
           </Form>
           </div>
         }
-        {submitted &&
-          <div className={classes.root}>
-            <p> Thanks for submitting the form!</p>
-          </div>
+        {submitted && 
+          <Alert severity="success">Thank you for submitting the form!</Alert>
         }
         </div>
     ) 

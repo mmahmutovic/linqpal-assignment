@@ -1,10 +1,13 @@
-import React, { useEffect} from 'react';
+import React, { useEffect, useState} from 'react';
 import { FormControl, Button } from '@material-ui/core';
 import { Form, Field } from 'react-final-form';
 import { makeStyles } from '@material-ui/core/styles';
 import { login } from './../../services/user.service';
 import { InputField } from './../InputField/InputField';
 import { getCurrentUser} from './../../services/user.service';
+import Alert from '@material-ui/lab/Alert';
+
+
 const useStyles = makeStyles((theme) => ({
     root: {
       '& .MuiTextField-root': {
@@ -36,15 +39,17 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Login (props){
     const classes = useStyles();
+    const [error, setError] = useState(undefined);
 
 
     const onSubmit =  async (values) =>{
         try {
           await login(values);
+          setError(undefined);
           props.history.push("/admin");
           window.location.reload();
         } catch(err) { 
-          console.log(err);
+          setError(err);
         }
     }
 
@@ -63,6 +68,9 @@ export default function Login (props){
                   <Field name="username" component={InputField} className={classes.textField} required label="Username" />
                   <Field name="password" required label="Password"  type="password" component={InputField} className={classes.textField} />
                   <Button className={classes.button} color="primary" onClick={handleSubmit}>Sign in</Button>
+                  {error && 
+                    <Alert severity="error">{error.message}!</Alert> 
+                  }
               </FormControl>
               )}
               </Form>

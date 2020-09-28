@@ -7,9 +7,10 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import Alert from '@material-ui/lab/Alert';
 import { getAllExternalUsers, getCurrentUser } from './../../services/user.service';
 const useStyles = makeStyles({
-    table: {
+    container: {
       minWidth: 650,
       maxWidth: '80%',
       margin: '16px auto',
@@ -19,21 +20,28 @@ const useStyles = makeStyles({
       display: "flex",
       justifyContent: "center",
       alignItems: "center",
-    },
+    }
   });
 
   
 export default function PersonList(props) {
     const classes = useStyles();
     const [users, setUsers] = useState([]);
+    const [error, setError] = useState(undefined);
     const [isLoading, setLoading] = useState(true);
     useEffect(() => {
         async function getUsers(){
           const user = getCurrentUser();
           if (user) {
+            try {
             const result = await getAllExternalUsers();
             setUsers(result.data);
+            setError(undefined);
             setLoading(false);
+            } catch(error) {
+              setError(error);
+              setLoading(true);
+            }
           } else {
             props.history.push('/login');
             window.location.reload();
@@ -42,9 +50,10 @@ export default function PersonList(props) {
         getUsers()
     }, []);
     return (
-      <TableContainer className={classes.table} component={Paper}>
-        {isLoading}
-        {
+      <div>
+      {!isLoading &&
+        <TableContainer className={classes.container} component={Paper}>
+        
             <Table size="small" aria-label="a dense table">
                 <TableHead>
                     <TableRow>
@@ -74,7 +83,13 @@ export default function PersonList(props) {
                     ))}
                 </TableBody>
             </Table>
-        }
-      </TableContainer>
+         </TableContainer>
+      }
+      {error && 
+        <div className={classes.container}>
+        <Alert severity="error">{error.message}!</Alert> 
+      </div>
+      }
+      </div>
     );
 }
