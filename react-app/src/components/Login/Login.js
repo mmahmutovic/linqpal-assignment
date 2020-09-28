@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { FormControl, Button } from '@material-ui/core';
 import { Form, Field } from 'react-final-form';
 import { makeStyles } from '@material-ui/core/styles';
 import { login } from './../../services/user.service';
 import { InputField } from './../InputField/InputField';
+import { getCurrentUser} from './../../services/user.service';
 const useStyles = makeStyles((theme) => ({
     root: {
       '& .MuiTextField-root': {
@@ -31,10 +32,17 @@ export default function Login (props){
 
     const classes = useStyles();
     const onSubmit =  async (values) =>{
-      console.log(values);
-      const result = await login(values);
-      console.log(result);
+      await login(values);
+      props.history.push("/admin");
+      window.location.reload();
     }
+    useEffect(() => {
+      const user = getCurrentUser();
+      if (user) {
+        props.history.push("/admin");
+        window.location.reload();
+      }
+    }, []);
     return (
         <div className={classes.container}>
            <Form onSubmit={onSubmit}>

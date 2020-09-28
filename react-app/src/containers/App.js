@@ -1,18 +1,26 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react-hooks/rules-of-hooks */
-import React, {Component,useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import classes from './App.css';
 import PersonRegistration from '../components/PersonRegistration/PersonRegistration';
 import Login from '../components/Login/Login';
 import PersonList from '../components/PersonList/PersonList';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { getCurrentUser, logout } from '../services/user.service';
+export default function App(props) {
+  const [currentUser, setCurrentUser] = useState(undefined);
+  useEffect(() => {
+    const user = getCurrentUser();
+    if (user) {
+      setCurrentUser(user);
+    }
+  }, []);
 
-export default function App() {
-
-  let state = {
-    authenticated: false,
-  }
+  const logOut = () => {
+    logout();
+    window.location.reload();
+  };
     return(
       <Router>
         <div>
@@ -20,8 +28,8 @@ export default function App() {
           <nav className="navbar navbar-expand-lg navbar-light bg-light">
           <ul className="navbar-nav mr-auto">
             <li><Link to={'/'} className="nav-link"> Register </Link></li>
-            <li><Link to={'/login'} className="nav-link">Login</Link></li>
-            <li><Link to={'/admin'} className="nav-link">External users</Link></li>
+            {currentUser ? (<li><Link to={'/login'} onClick={logOut} className="nav-link">Logout</Link></li>): (<li><Link to={'/login'} className="nav-link">Login</Link></li>)}
+            {currentUser && (<li><Link to={'/admin'} className="nav-link">External users</Link></li>)}
           </ul>
           </nav>
           <hr />
@@ -32,5 +40,6 @@ export default function App() {
           </Switch>
         </div>
       </Router>
+      
     );
 }

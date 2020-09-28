@@ -40,7 +40,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function PersonRegistration() {
     const classes = useStyles();
-    const [submitted, setSubmit] = useState(true);
+    const [submitted, setSubmit] = useState(false);
     const onSubmit =  async (values) =>{
       await addUser(values);
       setSubmit(true);

@@ -7,7 +7,7 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-import { getAllExternalUsers } from './../../services/user.service';
+import { getAllExternalUsers, getCurrentUser } from './../../services/user.service';
 const useStyles = makeStyles({
     table: {
       minWidth: 650,
@@ -16,15 +16,21 @@ const useStyles = makeStyles({
   });
 
   
-export default function PersonList() {
+export default function PersonList(props) {
     const classes = useStyles();
     const [users, setUsers] = useState([]);
     const [isLoading, setLoading] = useState(true);
     useEffect(() => {
         async function getUsers(){
+          const user = getCurrentUser();
+          if (user) {
             const result = await getAllExternalUsers();
             setUsers(result.data);
             setLoading(false);
+          } else {
+            props.history.push('/login');
+            window.location.reload();
+          }
         }
         getUsers()
     }, []);

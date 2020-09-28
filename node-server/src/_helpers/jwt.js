@@ -11,7 +11,6 @@ function jwt() {
       '/login',
       '/addUser',
       '/signup',
-      '/',
     ],
   });
 }
