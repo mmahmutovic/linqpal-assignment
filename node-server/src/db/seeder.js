@@ -8,4 +8,4 @@ const { User } = db;
 
 User.insertMany(users);
 // eslint-disable-next-line no-console
-console.log('Database seeded! Press CTRL+X to exit the process :)');
+console.log('Database seeded! Press CTRL+C to exit the process :)');
