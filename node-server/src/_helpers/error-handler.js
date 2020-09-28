@@ -1,22 +1,9 @@
 /* eslint-disable no-unused-vars */
-function errorHandler(err, req, res, next) {
-  if (typeof (err) === 'string') {
-    // custom application error
-    return res.status(400).json({
-      message: err,
-    });
-  }
-
-  if (err.name === 'UnauthorizedError') {
-    // jwt authentication error
-    return res.status(401).json({
-      message: 'Unauthorized, you need to login!',
-    });
-  }
-
-  // default to 500 server error
-  return res.status(500).json({
-    message: err.message,
+function errorHandler(res, err, message, status) {
+  return res.status(status || 500).json({
+    message: message || 'Internal server error!',
+    err: err || new Error(),
   });
 }
+
 module.exports = errorHandler;

@@ -12,7 +12,7 @@ async function auth(req, res) {
     const user = await User.findOne({
       username: req.body.username,
     });
-    if (!user) errorHandler("Username doesn't exists", req, res);
+    if (!user) return errorHandler(res, new Error('Unable to find the user, either userId is invalid or you have made an unauthorized request!'), 'Unable to find the user, either userId is invalid or you have made an unauthorized request!', 401);
     const { password } = user;
     const isMatch = await new Promise((resolve, reject) => {
       bcrypt.compare(req.body.password, password, (err, result) => {
@@ -20,7 +20,7 @@ async function auth(req, res) {
         resolve(result);
       });
     });
-    if (!isMatch) errorHandler('Password is incorrect', req, res);
+    if (!isMatch) return errorHandler(res, new Error('Password is incorrect'), 'Username and password does not match', 401);
     // create a jwt token that is valid for 7 days
     const token = jwt.sign({
       sub: user.id,
@@ -36,7 +36,7 @@ async function auth(req, res) {
       token,
     });
   } catch (error) {
-    return errorHandler(error, req, res);
+    return errorHandler(res, error, 'Internal Server Error!', 500);
   }
 }
 
@@ -68,10 +68,10 @@ async function createInternalUser(req, res) {
     const { username } = req.body;
     const { password } = req.body;
     if (!username || !password) {
-      return errorHandler('Please enter username and password', req, res);
+      return errorHandler(res, new Error('Username or password empty!'), 'Enter username and password!', 404);
     }
     if (await User.findOne({ username })) {
-      return errorHandler('User already exists with that username', req, res);
+      return errorHandler(res, new Error('Username taken!'), 'User already exists with that username', 404);
     }
     const hashed = await new Promise((resolve, reject) => {
       bcrypt.hash(password, saltRounds, (err, hash) => {

@@ -15,6 +15,7 @@ export const getAllExternalUsers = async () => {
 export const login = async (data) => {
     return await axios.post(API_URL + 'login',data)
       .then((response) => {
+          console.log(response)
         if (response.data.token) {
           localStorage.setItem("user", JSON.stringify(response.data));
         }

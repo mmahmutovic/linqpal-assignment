@@ -32,9 +32,12 @@ export default function Login (props){
 
     const classes = useStyles();
     const onSubmit =  async (values) =>{
-      await login(values);
-      props.history.push("/admin");
-      window.location.reload();
+      try {
+        await login(values);
+        props.history.push("/admin");
+        window.location.reload();
+      } catch(err){
+      }
     }
     useEffect(() => {
       const user = getCurrentUser();
