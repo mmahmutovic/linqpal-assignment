@@ -30,10 +30,12 @@ const useStyles = makeStyles((theme) => ({
     border: '1px solid #eee',
     boxShadow: '0 2px 3px #ccc',
     padding: '16px',
-    display: 'inline-block',
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
   },
   button: {
-    display:'inline-block'
+    display:'flex'
   }
   }));
 
@@ -48,8 +50,6 @@ export default function PersonRegistration() {
 
     return(
       <div
-        justify="center"
-        alignItems="center"
         className={classes.container}>
         
         {!submitted &&

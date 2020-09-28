@@ -11,7 +11,14 @@ import { getAllExternalUsers, getCurrentUser } from './../../services/user.servi
 const useStyles = makeStyles({
     table: {
       minWidth: 650,
-      maxWidth: '80%'
+      maxWidth: '80%',
+      margin: '16px auto',
+      border: '1px solid #eee',
+      boxShadow: '0 2px 3px #ccc',
+      padding: '16px',
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
     },
   });
 

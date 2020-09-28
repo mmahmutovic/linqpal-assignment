@@ -7,7 +7,6 @@ import Login from '../components/Login/Login';
 import PersonList from '../components/PersonList/PersonList';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { getCurrentUser, logout } from '../services/user.service';
-import "./App.css";
 export default function App() {
   const [currentUser, setCurrentUser] = useState(undefined);
   useEffect(() => {

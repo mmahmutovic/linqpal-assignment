@@ -25,7 +25,12 @@ const useStyles = makeStyles((theme) => ({
       border: '1px solid #eee',
       boxShadow: '0 2px 3px #ccc',
       padding: '16px',
-      display: 'inline-block',
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+    }, 
+    button: {
+      display:'flex'
     }
     }));
 export default function Login (props){
@@ -53,7 +58,7 @@ export default function Login (props){
               <FormControl className={classes.root}>
                   <Field name="username" component={InputField} className={classes.textField} required label="Username" />
                   <Field name="password" required label="Password"  type="password" component={InputField} className={classes.textField} />
-                  <Button color="primary" onClick={handleSubmit}>Sign in</Button>
+                  <Button className={classes.button} color="primary" onClick={handleSubmit}>Sign in</Button>
               </FormControl>
               )}
               </Form>
