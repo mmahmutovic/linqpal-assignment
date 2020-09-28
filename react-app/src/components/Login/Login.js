@@ -49,7 +49,7 @@ export default function Login (props){
               {({handleSubmit, values}) => (
               <FormControl className={classes.root}>
                   <Field name="username" component={InputField} className={classes.textField} required label="Username" />
-                  <Field name="password" component={InputField} className={classes.textField} required label="Password" type="password" />
+                  <Field name="password" required label="Password"  type="password" component={InputField} className={classes.textField} />
                   <Button color="primary" onClick={handleSubmit}>Sign in</Button>
               </FormControl>
               )}

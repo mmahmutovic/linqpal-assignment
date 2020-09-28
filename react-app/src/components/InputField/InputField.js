@@ -4,6 +4,5 @@ export function InputField ({ input, meta, ...props }) {
     const handleChange = (event) => {
       input.onChange(event.target.value)
     }
-  
-    return <TextField {...props} onChange={handleChange} />
+    return <TextField type = {input.type} {...props}  onChange={handleChange} />
   }
