@@ -17,15 +17,15 @@ esac
 # Package Manager Variable
 packageManager="npm"
 
-# Checking if Selected package manager is npm
-if [ "$n" == 1 ]
+# Checking if Selected package manager is yarn
+if [ "$n" == 2 ]
 
 then
-    packageManager="npm"
-
-# Else package manager is yarn
-else
     packageManager="yarn"
+
+# Else package manager is npm
+else
+    packageManager="npm"
 
 fi
 

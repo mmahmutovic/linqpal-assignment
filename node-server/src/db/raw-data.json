@@ -1,20 +1,20 @@
 [
     {
         "username": "saksijas",
-        "password": "password",
+        "password": "test",
         "externalUser": false
     }, {
         "username": "michael",
-        "password": "password",
+        "password": "test",
         "externalUser": false
 
     }, {
         "username": "tony",
-        "password": "password",
+        "password": "test",
         "externalUser": false
     }, {
         "username": "hr",
-        "password": "password",
+        "password": "test",
         "externalUser": false
     }, {
         "firstName": "Michael",

@@ -1,20 +1,20 @@
 [
     {
         "username": "saksijas",
-        "$2b$10$IfBYF.lAYIKt7hXgC21dzOgXUUcgJnfvDolDUGTp.Pl.fiojdlRoW": "$2b$10$IfBYF.lAYIKt7hXgC21dzOgXUUcgJnfvDolDUGTp.Pl.fiojdlRoW",
+        "password": "$2b$10$IfBYF.lAYIKt7hXgC21dzOgXUUcgJnfvDolDUGTp.Pl.fiojdlRoW",
         "externalUser": false
     }, {
         "username": "michael",
-        "$2b$10$IfBYF.lAYIKt7hXgC21dzOgXUUcgJnfvDolDUGTp.Pl.fiojdlRoW": "$2b$10$IfBYF.lAYIKt7hXgC21dzOgXUUcgJnfvDolDUGTp.Pl.fiojdlRoW",
+        "password": "$2b$10$IfBYF.lAYIKt7hXgC21dzOgXUUcgJnfvDolDUGTp.Pl.fiojdlRoW",
         "externalUser": false
 
     }, {
         "username": "tony",
-        "$2b$10$IfBYF.lAYIKt7hXgC21dzOgXUUcgJnfvDolDUGTp.Pl.fiojdlRoW": "$2b$10$IfBYF.lAYIKt7hXgC21dzOgXUUcgJnfvDolDUGTp.Pl.fiojdlRoW",
+        "password": "$2b$10$IfBYF.lAYIKt7hXgC21dzOgXUUcgJnfvDolDUGTp.Pl.fiojdlRoW",
         "externalUser": false
     }, {
         "username": "hr",
-        "$2b$10$IfBYF.lAYIKt7hXgC21dzOgXUUcgJnfvDolDUGTp.Pl.fiojdlRoW": "$2b$10$IfBYF.lAYIKt7hXgC21dzOgXUUcgJnfvDolDUGTp.Pl.fiojdlRoW",
+        "password": "$2b$10$IfBYF.lAYIKt7hXgC21dzOgXUUcgJnfvDolDUGTp.Pl.fiojdlRoW",
         "externalUser": false
     }, {
         "firstName": "Michael",

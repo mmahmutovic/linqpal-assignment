@@ -23,7 +23,7 @@ All the raw data that is not encrypted: [Info on user data](node-server/src/db/r
 To login you can use
 ```
 username: michael
-password: password
+password: test
 ```
 
 
