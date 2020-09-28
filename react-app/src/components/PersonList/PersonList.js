@@ -87,8 +87,8 @@ export default function PersonList(props) {
       }
       {error && 
         <div className={classes.container}>
-        <Alert severity="error">{error.message}!</Alert> 
-      </div>
+         <Alert severity="error">{error.message}!</Alert> 
+        </div>
       }
       </div>
     );
