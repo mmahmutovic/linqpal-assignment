@@ -19,10 +19,12 @@ sh stop-app.sh
 ```
 
 ## Users
-You can find users in ./node-server/db/raw-data.json
+All the raw data that is not encrypted: [Info on user data](node-server/src/db/raw-data.json)
 To login you can use
+```
 username: michael
 password: password
+```
 
 
 
