@@ -41,6 +41,8 @@ export default function Login (props){
     const onSubmit =  async (values) =>{
         try {
           await login(values);
+          props.history.push("/admin");
+          window.location.reload();
         } catch(err) { 
           console.log(err);
         }

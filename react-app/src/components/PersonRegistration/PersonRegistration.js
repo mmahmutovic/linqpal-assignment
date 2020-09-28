@@ -61,8 +61,8 @@ export default function PersonRegistration() {
               <FormControl className={classes.root} noValidate autoComplete="off">
                   <Field name="firstName" component={InputField} className={classes.textField} required label="First name" />
                   <Field name="lastName" component={InputField} className={classes.textField} required label="Last Name" />
-                  <Field name="ssn" component={InputField} className={classes.textField} required label="Social security number" defaultValue="" />
-                  <Field name="phoneNumber" component={InputField} className={classes.textField} required label="Phone number" defaultValue="" />
+                  <Field name="ssn" placeholder="555-55-5555" pattern="\d{3}-?\d{2}-?\d{4}" component={InputField} className={classes.textField} required label="Social security number" defaultValue="" />
+                  <Field name="phoneNumber"  placeholder="(555) 555-1212" pattern="/^\(?\d{3}\)?[.\s-]?\d{3}[.\s-]\d{4}$/" component={InputField} className={classes.textField} required label="Phone number" defaultValue="" />
                   <Field name="country" component={CountrySelector} className ={classes.selector} />
                   <Field name="city" component={CitySelector} country={values.country} className ={classes.selector} />      
                   <Field name="zipCode" component={InputField} className={classes.textField} label="Zip Code"/>
