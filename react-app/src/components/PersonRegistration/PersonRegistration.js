@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Form, Field } from 'react-final-form'
 import CountrySelector from '../CountrySelector/CountrySelector';
 import {FormControl, Button} from '@material-ui/core';
@@ -37,6 +37,9 @@ const useStyles = makeStyles((theme) => ({
   },
   button: {
     display:'flex'
+  },
+  alert: {
+    display: 'flex'
   }
   }));
 
@@ -44,9 +47,21 @@ const useStyles = makeStyles((theme) => ({
 export default function PersonRegistration() {
     const classes = useStyles();
     const [submitted, setSubmit] = useState(false);
+    const [hasEmptyFields, setHasEmptyFields] = useState(false);
     const onSubmit =  async (values) =>{
-      await addUser(values);
-      setSubmit(true);
+      const empty = checkProperties(values);
+      setHasEmptyFields(empty);
+      if(!empty) {
+        await addUser(values);
+        setSubmit(true);
+      }
+    }
+    const checkProperties = (obj) =>{
+      for (var key in obj) {
+          if (obj[key] !== null && obj[key] !== "")
+              return false;
+      }
+      return true;
     }
 
     return(
@@ -56,18 +71,21 @@ export default function PersonRegistration() {
         {!submitted &&
           <div>
             <h1>Hello, Please fill out this form</h1>
+            { hasEmptyFields &&
+              <Alert className={classes.alert} severity="error">All fields are required!</Alert>
+            }
             <Form onSubmit={onSubmit}>
               
             {({handleSubmit, values}) => (
               <FormControl className={classes.root} noValidate autoComplete="off">
-                  <Field name="firstName" component={InputField} className={classes.textField} required label="First name" />
-                  <Field name="lastName" component={InputField} className={classes.textField} required label="Last Name" />
+                  <Field name="firstName" component={InputField} className={classes.textField} required label="First name" defaultValue=""  />
+                  <Field name="lastName" component={InputField} className={classes.textField} required label="Last Name" defaultValue="" />
                   <Field name="ssn" placeholder="555-55-5555" pattern="\d{3}-?\d{2}-?\d{4}" component={InputField} className={classes.textField} required label="Social security number" defaultValue="" />
                   <Field name="phoneNumber"  placeholder="(555) 555-1212" pattern="/^\(?\d{3}\)?[.\s-]?\d{3}[.\s-]\d{4}$/" component={InputField} className={classes.textField} required label="Phone number" defaultValue="" />
-                  <Field name="country" component={CountrySelector} className ={classes.selector} />
-                  <Field name="city" component={CitySelector} country={values.country} className ={classes.selector} />      
-                  <Field name="zipCode" component={InputField} className={classes.textField} label="Zip Code"/>
-                  <Field name="address" component={InputField} className={classes.textField} label="Address"/>
+                  <Field name="country" component={CountrySelector} className ={classes.selector} defaultValue="" />
+                  <Field name="city" component={CitySelector} country={values.country} className ={classes.selector} defaultValue="" />      
+                  <Field name="zipCode" component={InputField} className={classes.textField} label="Zip Code" defaultValue="" />
+                  <Field name="address" component={InputField} className={classes.textField} label="Address" defaultValue="" />
                   <Button className={classes.button} variant="contained" color="primary" onClick={handleSubmit}>
                     Send data
                   </Button>
