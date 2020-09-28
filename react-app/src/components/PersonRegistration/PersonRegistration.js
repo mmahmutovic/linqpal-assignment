@@ -58,10 +58,11 @@ export default function PersonRegistration() {
     }
     const checkProperties = (obj) =>{
       for (var key in obj) {
-          if (obj[key] !== null && obj[key] !== "")
-              return false;
+        if (obj[key] === null || obj[key] === "") {
+            return true;
+        }
       }
-      return true;
+      return false;
     }
 
     return(
@@ -80,11 +81,11 @@ export default function PersonRegistration() {
               <FormControl className={classes.root} noValidate autoComplete="off">
                   <Field name="firstName" component={InputField} className={classes.textField} required label="First name" defaultValue=""  />
                   <Field name="lastName" component={InputField} className={classes.textField} required label="Last Name" defaultValue="" />
-                  <Field name="ssn" placeholder="555-55-5555" pattern="\d{3}-?\d{2}-?\d{4}" component={InputField} className={classes.textField} required label="Social security number" defaultValue="" />
-                  <Field name="phoneNumber"  placeholder="(555) 555-1212" pattern="/^\(?\d{3}\)?[.\s-]?\d{3}[.\s-]\d{4}$/" component={InputField} className={classes.textField} required label="Phone number" defaultValue="" />
+                  <Field name="ssn" placeholder="555-55-5555" component={InputField} className={classes.textField} required label="Social security number" defaultValue="" />
+                  <Field name="phoneNumber" placeholder="(555) 555-1212" component={InputField} className={classes.textField} required label="Phone number" defaultValue="" />
                   <Field name="country" component={CountrySelector} className ={classes.selector} defaultValue="" />
                   <Field name="city" component={CitySelector} country={values.country} className ={classes.selector} defaultValue="" />      
-                  <Field name="zipCode" component={InputField} className={classes.textField} label="Zip Code" defaultValue="" />
+                  <Field name="zipCode" placeholder="12345-6789" component={InputField} className={classes.textField} label="Zip Code" defaultValue="" />
                   <Field name="address" component={InputField} className={classes.textField} label="Address" defaultValue="" />
                   <Button className={classes.button} variant="contained" color="primary" onClick={handleSubmit}>
                     Send data
